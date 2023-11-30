@@ -95,13 +95,14 @@ function createGrid(){
             break;
         default:
             alert('Scegli un livello di difficoltà prima di iniziare la partita');
-            break;
+            return;
     }
     // mi calcolo quante celle per riga tramite radice quadrata del numero totale di celle della griglia
     cellsPerRow = Math.sqrt(numCells);
 
     const bombs = generateBombNumbers(NUMBERS_OF_BOMBS, numCells)
     
+    // a gioco iniziato, imposto la variabile flag gameInProgress su true
     gameInProgress = true;
 
     for (let i = 1; i <= numCells; i++){
@@ -116,7 +117,7 @@ function createGrid(){
                     this.classList.add('clicked');
         
                     points++;
-        
+                    
                     document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
                 }
                 else {
@@ -132,7 +133,10 @@ function createGrid(){
     }
     // controllo il valore della variabile flag gameInProgress
     if (!gameInProgress) {
+        // impedisco all'utente di cliccare sulle altre celle se la partita è terminata
         grid.removeEventListener('click', handleClick);
+        
+
     }
 
 }
