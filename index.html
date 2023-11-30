@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo minato - Grid</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="body-bg">
+    <main class="my-3">
+        <h1 class="text-center text-white text-uppercase">Campo minato - Grid</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <button id="play" class="btn btn-success my-3">Gioca</button>
+            <select name="difficulty" id="difficulty" class="ms-3 form-select w-50">
+                <option value="0">Scegli la difficoltà</option>
+                <option value="1">Difficoltà 1</option>
+                <option value="2">Difficoltà 2</option>
+                <option value="3">Difficoltà 3</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div id="grid" class="d-flex justify-content-center"></div>
+        </div>
+    </main>
+    <script type="text/javascript" src="./js/script.js"></script>
+</body>
+</html>
