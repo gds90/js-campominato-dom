@@ -33,7 +33,7 @@ function generateBombNumbers(bomb_numbers, total_cells) {
     for (let i = 0; i<bomb_numbers; i++){
 
         // push del numero random generato tramite la funzione precedentemente creata
-        bombs.push(generateRandomNumber(total_cells));
+        bombs.push(generateRandomNumber(bombs, total_cells));
     }
 
     // ritorno l'array con i 16 numeri bomba
@@ -65,6 +65,8 @@ function createGrid(){
     // svuoto l'elemento grid per evitare di generare più griglie 
     grid.innerHTML = "";
 
+    document.getElementById('score').innerText = "";
+
     // BONUS
     // recupero l'elemento select che mi definirà la difficoltà scelta dall'utente
     const difficulty = document.getElementById('difficulty');
@@ -91,38 +93,48 @@ function createGrid(){
         case '3':
             numCells = 49;
             break;
-        default: 
+        default:
+            alert('Scegli un livello di difficoltà prima di iniziare la partita');
             break;
     }
     // mi calcolo quante celle per riga tramite radice quadrata del numero totale di celle della griglia
     cellsPerRow = Math.sqrt(numCells);
 
     const bombs = generateBombNumbers(NUMBERS_OF_BOMBS, numCells)
-                
+    
+    gameInProgress = true;
+
     for (let i = 1; i <= numCells; i++){
         // richiamo della funzione che crea la cella
         let numberedCell = createCell(i, cellsPerRow);
                 
         // creo un event listener per ogni cella creata che mi permette di colorarla di azzurro quando viene cliccata
         numberedCell.addEventListener('click', function(){
-            if (!bombs.includes(i)){
-                
-                this.classList.add('clicked');
-    
-                points++;
-    
-                document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
-    
-                console.log("Hai cliccato la cella numero: " + numberedCell.textContent);
-            }
-            else {
-                this.classList.add('clicked-bomb');
+            if (gameInProgress){
+                if (!bombs.includes(i)){
+                    
+                    this.classList.add('clicked');
+        
+                    points++;
+        
+                    document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
+                }
+                else {
+                    this.classList.add('clicked-bomb');
+                    alert('Boom, hai perso!')
+                    gameInProgress = false;
+                }
             }
         })
             
         // appendo la cella appena creata in row
         grid.appendChild(numberedCell);
-    }                 
+    }
+    // controllo il valore della variabile flag gameInProgress
+    if (!gameInProgress) {
+        grid.removeEventListener('click', handleClick);
+    }
+
 }
 
 // recupero il bottone che genererà la griglia
@@ -132,3 +144,6 @@ const playButton = document.getElementById('play');
 playButton.addEventListener('click', function(){
     createGrid();
 })
+
+// dichiaro una variabile flag che mi servirà per permettere al gioco di interrompersi in caso di click su un numero bomba
+let gameInProgress = false;

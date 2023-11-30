@@ -10,6 +10,7 @@
 
 #grid {
     flex-wrap: wrap;
+    height: 1000px;
 }
 
 .cell {
