@@ -9,13 +9,10 @@
 }
 
 #grid {
-    width: 1000px;
     flex-wrap: wrap;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
     background-color: #fff;
     border: 1px solid black;
     display: flex;
@@ -25,4 +22,8 @@
 
 .clicked {
     background-color: dodgerblue;
+}
+
+.clicked-bomb {
+    background-color: red;
 }
