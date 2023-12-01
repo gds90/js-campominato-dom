@@ -121,7 +121,19 @@ function createGrid(){
                     document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
                 }
                 else {
+                    // dichiaro una costante che mi contiene tutte le celle della griglia
+                    const cells = document.querySelectorAll('.cell')
+
+                    // ciclo le caselle della griglia e controllo se sia presente nell'array delle bombe
+                    for (let i = 0; i < cells.length; i++){
+
+                        // verifico se l'elemento ciclato è presente nell'array delle bombe
+                        if (bombs.includes(parseInt(cells[i].innerText))){
+                            cells[i].classList.add('clicked-bomb');
+                        }
+                    }
                     this.classList.add('clicked-bomb');
+
                     alert('Boom, hai perso!')
                     gameInProgress = false;
                 }
