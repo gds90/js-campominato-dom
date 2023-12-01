@@ -106,6 +106,7 @@ function createGrid(){
     gameInProgress = true;
 
     for (let i = 1; i <= numCells; i++){
+
         // richiamo della funzione che crea la cella
         let numberedCell = createCell(i, cellsPerRow);
                 
@@ -113,17 +114,22 @@ function createGrid(){
         numberedCell.addEventListener('click', function(){
             if (gameInProgress){
                 if (!bombs.includes(i)){
-                    
-                    this.classList.add('clicked');
-        
-                    points++;
-                    
-                    document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
+                    // controllo se la cella cliccata non abbia già la classe clicked per evitare di aumentare il punteggio se la cella venisse cliccata di nuovo
+                    if(!this.classList.contains('clicked')){
+                        this.classList.add('clicked');
+            
+                        points++;
+                        
+                        document.getElementById('score').innerText = `Il tuo punteggio totale è di ${points} punti`;
+                    }
                 }
                 else {
                     // dichiaro una costante che mi contiene tutte le celle della griglia
                     const cells = document.querySelectorAll('.cell')
-
+                    
+                    this.classList.add('clicked-bomb');
+                    alert('Boom, hai perso!')
+                    gameInProgress = false;
                     // ciclo le caselle della griglia e controllo se sia presente nell'array delle bombe
                     for (let i = 0; i < cells.length; i++){
 
@@ -133,9 +139,6 @@ function createGrid(){
                         }
                     }
 
-                    this.classList.add('clicked-bomb');
-                    alert('Boom, hai perso!')
-                    gameInProgress = false;
                 }
             }
         })
