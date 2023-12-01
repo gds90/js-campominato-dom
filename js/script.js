@@ -132,8 +132,8 @@ function createGrid(){
                             cells[i].classList.add('clicked-bomb');
                         }
                     }
-                    this.classList.add('clicked-bomb');
 
+                    this.classList.add('clicked-bomb');
                     alert('Boom, hai perso!')
                     gameInProgress = false;
                 }
